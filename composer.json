@@ -11,6 +11,7 @@
     ],
     "homepage": "https://github.com/idekite/flexcodesdk",
     "keywords": ["Laravel", "flexcodesdk"],
+    "minimum-stability": "stable",
     "require": {
         "illuminate/support": "~5"
     },
