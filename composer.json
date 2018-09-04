@@ -1,0 +1,41 @@
+{
+    "name": "idekite/flexcodesdk",
+    "description": ":description",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Feri Harjulianto",
+            "email": "feriharjulianto@gmail.com",
+            "homepage": "https://kata-kutuku.net"
+        }
+    ],
+    "homepage": "https://github.com/idekite/flexcodesdk",
+    "keywords": ["Laravel", "flexcodesdk"],
+    "require": {
+        "illuminate/support": "~5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6.0",
+        "orchestra/testbench": "~3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "idekite\\flexcodesdk\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "idekite\\flexcodesdk\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "idekite\\flexcodesdk\\flexcodesdkServiceProvider"
+            ],
+            "aliases": {
+                "flexcodesdk": "idekite\\flexcodesdk\\Facades\\flexcodesdk"
+            }
+        }
+    }
+}
