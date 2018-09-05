@@ -16,6 +16,11 @@ $ composer require idekite/flexcodesdk
 ```
 
 ## Usage
+Installation
+``` bash
+$ php artisan vendor:publish
+$ php artisan:migrate
+```
 
 ## Change log
 
