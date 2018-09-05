@@ -8,11 +8,11 @@ class flexcodesdk
 {
     public static function getDevice()
     {
-    	$data['device_name'] 		=  Config::get('FLEXCODE_DEVICE');
-    	$data['serial_number'] 		=  Config::get('FLEXCODE_SN');
-    	$data['verification_code'] 	=  Config::get('FLEXCODE_VC');
-    	$data['activation_code'] 	=  Config::get('FLEXCODE_AC');
-    	$data['verification_key'] 	=  Config::get('FLEXCODE_VKEY');
+    	$data['device_name'] 		=  env('FLEXCODE_DEVICE');
+    	$data['serial_number'] 		=  env('FLEXCODE_SN');
+    	$data['verification_code'] 	=  env('FLEXCODE_VC');
+    	$data['activation_code'] 	=  env('FLEXCODE_AC');
+    	$data['verification_key'] 	=  env('FLEXCODE_VKEY');
 
     	return response()->json($data);
     }

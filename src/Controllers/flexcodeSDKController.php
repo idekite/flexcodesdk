@@ -9,12 +9,7 @@ use flexcodesdk;
 
 class flexcodeSDKController extends Controller
 {
-    public function test_controller()
-    {
-    	echo "aku di controller lo";
-    }
-
-    public function test_facade()
+    public function status()
     {
     	$data = flexcodesdk::getDevice();
     	return $data;
