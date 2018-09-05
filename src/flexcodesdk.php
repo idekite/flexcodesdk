@@ -8,13 +8,13 @@ class flexcodesdk
 {
     public static function getDevice()
     {
-    	$data['device_name'] 		=  env('FLEXCODE_DEVICE');
-    	$data['serial_number'] 		=  env('FLEXCODE_SN');
-    	$data['verification_code'] 	=  env('FLEXCODE_VC');
-    	$data['activation_code'] 	=  env('FLEXCODE_AC');
-    	$data['verification_key'] 	=  env('FLEXCODE_VKEY');
+        $data['device_name']        =  env('FLEXCODE_DEVICE');
+        $data['serial_number']      =  env('FLEXCODE_SN');
+        $data['verification_code']  =  env('FLEXCODE_VC');
+        $data['activation_code']    =  env('FLEXCODE_AC');
+        $data['verification_key']   =  env('FLEXCODE_VKEY');
 
-    	return response()->json($data);
+        return response()->json($data);
     }
 
     public function registerUrl($user_id)
@@ -64,45 +64,27 @@ class flexcodesdk
 
     public function register($id, $serialized_data)
     {
-        $result = array(
-            'verified' => false,
-            'user' => null,
-            'message' => '',
-        );
-        $result['user'] = \App\User::find($id);
-        if($result['user'] == null){
+        $user = \App\Pengguna::find($id);
+
+        if ($user == NULL) {
             $result['message'] = 'User not found';
             return $result;
-        }
-        try{
-            $data = flexcodesdk::decodeRegistrationData($serialized_data);
-            if(empty($data)){
+        }else{
+            $data = explode(";", $serialized_data);
+
+            if(empty($data[3])) {
                 $result['message'] = 'Error decoding fingerprint data';
                 return $result;
-            }
-            
-            if(flexcodesdk::isValidRegistration($result['user'], $data)){
-                $result['user']->fingerprints = $data['regTemp'];
-                if($result['user']->save()){
-                    $result['verified'] = true;
-                    $result['message'] = 'Fingerprints template successfully registered';
-                    return $result;
-                }
-                else{
-                    $result['message'] = 'Error saving fingerprint';
-                    return $result;
-                }
-            }
-            else{
-                $result['message'] = 'Data is not valid';
+            }else{
+                $update['fingerprints'] = $data[3];
+                $user->update($update);
+
+                $result['message'] = 'Fingerprints successfully registered';
                 return $result;
             }
         }
-        catch(Exception $e){
-            $result['message'] = $e->getMessage();
-            return $result;
-        }
-        return $result;
+
+        
     }
 
     public function verificationUrl($user, $extra = array())
@@ -116,7 +98,7 @@ class flexcodesdk
         $verified = false;
         $message = '';
         try{
-            $user = \App\User::findOrFail($id);
+            $user = \App\Pengguna::findOrFail($id);
         }
         catch(Exception $e){
             $message = 'User not found';
@@ -175,6 +157,11 @@ class flexcodesdk
             'message' => 'Fingerprint mismatch',
         );
         return $result;
+    }
+
+    public function getRegistrationLink($id)
+    {
+        return 'finspot:FingerspotReg;' . base64_encode(url('fingerprints/register/' . $id));
     }
 
 }

@@ -24,7 +24,12 @@ class flexcodesdkServiceProvider extends ServiceProvider
             // Publishing the configuration file.
             $this->publishes([
                 __DIR__.'/../config/flexcodesdk.php' => config_path('flexcodesdk.php'),
-            ], 'flexcodesdk.config');
+            ], 'flexcodesdk-config');
+
+            // Publishing the models.
+            $this->publishes([
+                __DIR__.'/../models' => base_path('app'),
+            ], 'flexcodesdk-models');
 
             // Publishing the views.
             // $this->publishes([
