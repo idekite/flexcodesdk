@@ -54,9 +54,6 @@ class flexcodesdkServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__.'/../config/flexcodesdk.php', 'flexcodesdk');
-
-        // Register controller
-        $this->app->make('idekite\flexcodesdk\flexcodeSDKController');
         
         // Register the service the package provides.
         $this->app->singleton('flexcodesdk', function ($app) {
