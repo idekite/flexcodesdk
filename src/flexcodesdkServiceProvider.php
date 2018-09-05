@@ -15,7 +15,7 @@ class flexcodesdkServiceProvider extends ServiceProvider
     {
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'idekite');
         // $this->loadViewsFrom(__DIR__.'/../resources/views', 'idekite');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadRoutesFrom(__DIR__.'/routes.php');
 
         // Publishing is only necessary when using the CLI.
@@ -27,9 +27,9 @@ class flexcodesdkServiceProvider extends ServiceProvider
             ], 'flexcodesdk.config');
 
             // Publishing the views.
-            /*$this->publishes([
-                __DIR__.'/../resources/views' => base_path('resources/views/vendor/idekite'),
-            ], 'flexcodesdk.views');*/
+            // $this->publishes([
+            //     __DIR__.'/../resources/views' => base_path('resources/views/vendor/idekite'),
+            // ], 'flexcodesdk.views');
 
             // Publishing assets.
             /*$this->publishes([
